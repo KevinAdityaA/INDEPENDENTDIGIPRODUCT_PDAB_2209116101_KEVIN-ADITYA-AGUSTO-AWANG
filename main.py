@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
-from sklearn.cluster import KMeans
+from sklearn.cluster import AgglomerativeClustering
 from sklearn.preprocessing import StandardScaler
 
 def load_data():
@@ -25,9 +25,9 @@ def perform_clustering(data, n_clusters):
     scaler = StandardScaler()
     X_scaled = scaler.fit_transform(X)
 
-    # Perform KMeans clustering
-    kmeans = KMeans(n_clusters=n_clusters, random_state=42)
-    data['Cluster'] = kmeans.fit_predict(X_scaled)
+    # Perform Agglomerative Clustering
+    agglomerative = AgglomerativeClustering(n_clusters=n_clusters)
+    data['Cluster'] = agglomerative.fit_predict(X_scaled)
 
     return data
 
@@ -85,7 +85,6 @@ def main():
             st.subheader(f"Cluster {cluster_id}")
             cluster_data = clustered_data[clustered_data['Cluster'] == cluster_id]
             st.write(cluster_data[['Countries and areas']])
-
 
     # Explanation of clusters
     st.write("Cluster 0: Negara-negara dalam klaster ini mungkin memiliki karakteristik pendidikan yang lebih baik atau lebih maju. Ini bisa ditunjukkan dengan tingkat penyelesaian yang tinggi di semua tingkatan pendidikan dan jumlah minimal atau tidak ada anak-anak di luar sekolah pada semua tingkatan. Negara-negara dalam klaster ini mungkin memiliki sistem pendidikan yang efektif dan tersedia untuk semua jenis kelamin.")
