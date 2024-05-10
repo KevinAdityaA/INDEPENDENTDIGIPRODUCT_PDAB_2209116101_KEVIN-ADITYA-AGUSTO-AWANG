@@ -41,6 +41,15 @@ def main():
     # Display data
     st.subheader("Data Preview")
     st.write(data.head())
+     # Display total data
+    st.info(f"Jumlah total data: {len(data)}")
+
+    # Display jumlah baris
+    st.success(f"Jumlah baris: {data.shape[0]}")
+
+    # Display jumlah kolom
+    st.warning(f"Jumlah kolom: {data.shape[1]}")
+
 
     # Education Characteristics Analysis
     st.subheader("Analisis Karakteristik Pendidikan")
